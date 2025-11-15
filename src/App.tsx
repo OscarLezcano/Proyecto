@@ -1,5 +1,13 @@
+import Login from "./components/Login";
+import TablaProducto from "./components/TablaProducto";
+
 function App() {
-	return <></>;
+	//Hice mi mejor intento para cargar la TablaProducto pero por alguna razon no funciona
+	return (
+		<>
+			<Login />
+		</>
+	);
 }
 
 export default App;
