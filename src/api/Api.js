@@ -118,3 +118,12 @@ async function getProductoById(id_producto) {
 		.then((data) => data)
 		.catch((err) => console.error("getProductoById error: ", err));
 }
+
+export default {
+	getToken,
+	getProductos,
+	addProducto,
+	editProducto,
+	deleteProducto,
+	getProductoById,
+};
