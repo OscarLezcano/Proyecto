@@ -7,6 +7,7 @@ function Login({
 }) {
 	// Genero un token vacio, por las dudas (a nadie le gusta esperar un str y recivir un null)
 	localStorage.setItem("token", "");
+	localStorage.setItem("isLogged", "false");
 	return (
 		<div className="min-h-screen flex items-center justify-center">
 			<div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -21,13 +22,17 @@ function Login({
 							const email = String(fd.get("email") ?? "");
 							const password = String(fd.get("contrasena") ?? "");
 
-							// Si se puede guardo el token el localStorage
-							const token = (await Api.getToken(email, password)) ?? "";
-							if (token === "") {
+							// Obtengo la Api y si no se consigue muestra una alerta
+							const token = await Api.getToken(email, password);
+							if (!token) {
 								alert("No se pudo obtener el token");
+								return;
 							}
+
+							// Si el logueo es exitoso
 							localStorage.setItem("token", token);
-							onLogin(token);
+							localStorage.setItem("isLogged", "true");
+							onLogin(true); // Para mostrar el home
 						}}
 					>
 						<div>
