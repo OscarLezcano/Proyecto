@@ -2,13 +2,7 @@
 import { useEffect, useState } from "react";
 import Api from "../api/Api";
 
-function TablaProducto() {
-	const [productos, setProductos] = useState([]);
-
-	useEffect(() => {
-		Api.getProductos().then((p) => setProductos(p ?? []));
-	}, []);
-
+function TablaProducto({ productos, setProductos }) {
 	const handleDelete = async (id) => {
 		const isDelete = await Api.deleteProducto(id);
 		if (isDelete) {
