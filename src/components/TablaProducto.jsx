@@ -14,19 +14,21 @@ function TablaProducto({ productos, setProductos }) {
 
 	const rows = [];
 	for (const producto of productos) {
+		let stockColor = "";
+		if (producto.stock_quantity >= 0 && producto.stock_quantity <= 10) {
+			stockColor = "text-red-500";
+		} else if (producto.stock_quantity <= 99) {
+			stockColor = "text-yellow-500";
+		} else {
+			stockColor = "text-green-600";
+		}
+
 		rows.push(
 			<tr key={producto.id}>
 				<td>{producto.id}</td>
 				<td>{producto.name}</td>
 				<td>{producto.price}$</td>
-				<td
-					//Esto habria que mejorar y poner colores intermedios
-					className={
-						producto.stock_quantity <= 5 ? "text-red-500" : "text-green-600"
-					}
-				>
-					{producto.stock_quantity}
-				</td>
+				<td className={stockColor}>{producto.stock_quantity}</td>
 				<td>
 					<button className="btn btn-warning mr-1">Editar</button>
 					<button
