@@ -48,7 +48,9 @@ function Login({
 				</div>
 
 				<div>
-					<button type="submit">Ingresar</button>
+					<button className="bg-amber-950" type="submit">
+						Ingresar
+					</button>
 				</div>
 			</form>
 		</>
