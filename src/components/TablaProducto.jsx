@@ -9,6 +9,15 @@ function TablaProducto() {
 		Api.getProductos().then((p) => setProductos(p ?? []));
 	}, []);
 
+	const handleDelete = async (id) => {
+		const isDelete = await Api.deleteProducto(id);
+		if (isDelete) {
+			Api.getProductos().then((p) => setProductos(p ?? []));
+		} else {
+			alert("No se pudo eliminar el producto.");
+		}
+	};
+
 	const rows = [];
 	for (const producto of productos) {
 		rows.push(
@@ -17,12 +26,20 @@ function TablaProducto() {
 				<td>{producto.name}</td>
 				<td>{producto.price}</td>
 				<td>{producto.stock_quantity}</td>
-				<td>NADA</td>
+				<td>
+					<button className="btn btn-warning mr-1">Editar</button>
+					<button
+						className="btn btn-error"
+						onClick={() => handleDelete(producto.id)}
+					>
+						Eliminar
+					</button>
+				</td>
 			</tr>
 		);
 	}
 	return (
-		<div className="min-h-screen flex items-center justify-center m-15">
+		<div className="ml-15 mr-15 mt-10">
 			<table className="table">
 				<thead>
 					<tr>

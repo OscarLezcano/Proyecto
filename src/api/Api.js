@@ -84,10 +84,13 @@ async function editProducto(id_producto, producto) {
 	};
 	const endpoint = baseUrl + `/api/inventory/products/${id_producto}/`;
 
-	return await fetch(endpoint, init)
-		.then((res) => res.json())
-		.then((data) => data)
-		.catch((err) => console.error("addProducto error: ", err));
+	try {
+		const res = await fetch(endpoint, init);
+		return res.ok;
+	} catch (err) {
+		console.error("editProducto error: ", err);
+		return false;
+	}
 }
 
 async function deleteProducto(id_producto) {
@@ -100,10 +103,13 @@ async function deleteProducto(id_producto) {
 	};
 	const endpoint = baseUrl + `/api/inventory/products/${id_producto}/`;
 
-	return await fetch(endpoint, init)
-		.then((res) => res.json())
-		.then((data) => data)
-		.catch((err) => console.error("deleteProducto error: ", err));
+	try {
+		const res = await fetch(endpoint, init);
+		return res.ok;
+	} catch (err) {
+		console.error("deleteProducto error: ", err);
+		return false;
+	}
 }
 
 async function getProductoById(id_producto) {
