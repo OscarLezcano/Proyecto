@@ -18,8 +18,15 @@ function TablaProducto({ productos, setProductos }) {
 			<tr key={producto.id}>
 				<td>{producto.id}</td>
 				<td>{producto.name}</td>
-				<td>{producto.price}</td>
-				<td>{producto.stock_quantity}</td>
+				<td>{producto.price}$</td>
+				<td
+					//Esto habria que mejorar y poner colores intermedios
+					className={
+						producto.stock_quantity <= 5 ? "text-red-500" : "text-green-600"
+					}
+				>
+					{producto.stock_quantity}
+				</td>
 				<td>
 					<button className="btn btn-warning mr-1">Editar</button>
 					<button
