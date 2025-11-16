@@ -40,6 +40,7 @@ function AnadirProducto({ setProductos }) {
 					placeholder="Cantidad"
 					value={cantidad}
 					onChange={(e) => setCantidad(e.target.value)}
+					min={0}
 				/>
 
 				<input
@@ -50,6 +51,7 @@ function AnadirProducto({ setProductos }) {
 					placeholder="Precio"
 					value={precio}
 					onChange={(e) => setPrecio(e.target.value)}
+					min={0}
 				/>
 
 				<button className="btn btn-primary mr-1" type="submit">
