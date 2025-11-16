@@ -5,7 +5,7 @@ function Login({
 	contrasena = "test123456",
 	onLogin,
 }) {
-	// Genero un token vacio, por las dudas (a nadie le gusta esperar un str y recivir un null)
+	// Inicializo los valores del localStorage
 	localStorage.setItem("token", "");
 	localStorage.setItem("isLogged", "false");
 	return (
