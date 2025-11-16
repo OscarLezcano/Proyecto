@@ -22,18 +22,20 @@ function TablaProducto() {
 		);
 	}
 	return (
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>NOMBRE</th>
-					<th>PRECIO</th>
-					<th>STOCK</th>
-					<th>ACCION</th>
-				</tr>
-			</thead>
-			<tbody>{rows}</tbody>
-		</table>
+		<div className="min-h-screen flex items-center justify-center m-15">
+			<table className="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>NOMBRE</th>
+						<th>PRECIO</th>
+						<th>STOCK</th>
+						<th>ACCION</th>
+					</tr>
+				</thead>
+				<tbody>{rows}</tbody>
+			</table>
+		</div>
 	);
 }
 

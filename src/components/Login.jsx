@@ -8,52 +8,65 @@ function Login({
 	// Genero un token vacio, por las dudas (a nadie le gusta esperar un str y recivir un null)
 	localStorage.setItem("token", "");
 	return (
-		<>
-			<form
-				onSubmit={async (e) => {
-					e.preventDefault();
-					const fd = new FormData(e.currentTarget);
-					const email = String(fd.get("email") ?? "");
-					const password = String(fd.get("contrasena") ?? "");
+		<div className="min-h-screen flex items-center justify-center">
+			<div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+				<div className="card-body">
+					<h1 className="text-2xl sm:text-3xl font-extrabold text-center">
+						LOGIN
+					</h1>
+					<form
+						onSubmit={async (e) => {
+							e.preventDefault();
+							const fd = new FormData(e.currentTarget);
+							const email = String(fd.get("email") ?? "");
+							const password = String(fd.get("contrasena") ?? "");
 
-					// Si se puede guardo el token el localStorage
-					const token = (await Api.getToken(email, password)) ?? "";
-					if (token === "") {
-						alert("No se pudo obtener el token");
-					}
-					localStorage.setItem("token", token);
-					onLogin(token);
-				}}
-			>
-				<div>
-					<label htmlFor="email">Correo electrónico</label>
-					<input
-						id="email"
-						name="email"
-						type="email"
-						defaultValue={email}
-						required
-					/>
-				</div>
+							// Si se puede guardo el token el localStorage
+							const token = (await Api.getToken(email, password)) ?? "";
+							if (token === "") {
+								alert("No se pudo obtener el token");
+							}
+							localStorage.setItem("token", token);
+							onLogin(token);
+						}}
+					>
+						<div>
+							<label className="label" htmlFor="email">
+								Correo electrónico
+							</label>
+							<input
+								id="email"
+								name="email"
+								type="email"
+								className="input"
+								defaultValue={email}
+								required
+							/>
+						</div>
 
-				<div>
-					<label htmlFor="contrasena">Contraseña</label>
-					<input
-						id="contrasena"
-						name="contrasena"
-						type="password"
-						defaultValue={contrasena}
-						required
-					/>
-				</div>
+						<div>
+							<label className="label" htmlFor="contrasena">
+								Contraseña
+							</label>
+							<input
+								id="contrasena"
+								name="contrasena"
+								type="password"
+								className="input"
+								defaultValue={contrasena}
+								required
+							/>
+						</div>
 
-				<div>
-					<button className="bg-amber-950" type="submit">
-						Ingresar
-					</button>
+						<div className="mt-4 flex justify-center">
+							<button className="btn btn-neutral" type="submit">
+								Ingresar
+							</button>
+						</div>
+					</form>
 				</div>
-			</form>
-		</>
+			</div>
+		</div>
 	);
 }
 
