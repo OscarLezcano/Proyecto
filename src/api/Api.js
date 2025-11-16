@@ -2,6 +2,9 @@
 // │                          API                           │
 // ╰────────────────────────────────────────────────────────╯
 
+// * NOTE: TODOS LOS LOS METODOS QUE NECESITEN DEL TOKEN LO BUSCARAN EN EL
+// * LOCAL STORAGE
+
 // POST: ADD
 // GET: GET
 // PUT: UPDATE

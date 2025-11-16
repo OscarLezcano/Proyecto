@@ -1,6 +1,12 @@
 import Api from "../api/Api";
 
-function Login({ email = "admin@minierp.com", contrasena = "test123456" }) {
+function Login({
+	email = "admin@minierp.com",
+	contrasena = "test123456",
+	onLogin,
+}) {
+	// Genero un token vacio, por las dudas (a nadie le gusta esperar un str y recivir un null)
+	localStorage.setItem("token", "");
 	return (
 		<>
 			<form
@@ -9,10 +15,14 @@ function Login({ email = "admin@minierp.com", contrasena = "test123456" }) {
 					const fd = new FormData(e.currentTarget);
 					const email = String(fd.get("email") ?? "");
 					const password = String(fd.get("contrasena") ?? "");
-					// Guarda el token el localStorage
-					// ! Estaria lindo que mostrase un error
-					localStorage.setItem("token", await Api.getToken(email, password));
-					console.log("Token guardado :)");
+
+					// Si se puede guardo el token el localStorage
+					const token = (await Api.getToken(email, password)) ?? "";
+					if (token === "") {
+						alert("No se pudo obtener el token");
+					}
+					localStorage.setItem("token", token);
+					onLogin(token);
 				}}
 			>
 				<div>

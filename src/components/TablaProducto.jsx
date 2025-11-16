@@ -6,13 +6,13 @@ function TablaProducto() {
 	const [productos, setProductos] = useState([]);
 
 	useEffect(() => {
-		Api.getProductos().then((p) => setProductos(p || []));
+		Api.getProductos().then((p) => setProductos(p ?? []));
 	}, []);
 
 	const rows = [];
 	for (const producto of productos) {
 		rows.push(
-			<tr>
+			<tr key={producto.id}>
 				<td>{producto.id}</td>
 				<td>{producto.name}</td>
 				<td>{producto.price}</td>

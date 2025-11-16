@@ -1,14 +1,15 @@
+import { useState } from "react";
 import Login from "./components/Login";
-import TablaProducto from "./components/TablaProducto";
+import Home from "./pages/Home";
 
 function App() {
-	//Hice mi mejor intento para cargar la TablaProducto pero por alguna razon no funciona
-	return (
-		<>
-			<Login />
-			<TablaProducto />
-		</>
+	const [token, setToken] = useState<string>(
+		localStorage.getItem("token") ?? ""
 	);
+	if (token === "") {
+		return <Login onLogin={setToken} />;
+	}
+	return <Home />;
 }
 
 export default App;
