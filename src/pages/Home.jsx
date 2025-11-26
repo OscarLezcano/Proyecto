@@ -1,5 +1,5 @@
 import TablaProducto from "../components/TablaProducto";
-import AnadirProducto from "../components/AnadirProducto";
+import BarraAnadirProducto from "../components/BarraAnadirProducto";
 import Api from "../api/Api";
 import { useState, useEffect } from "react";
 
@@ -12,7 +12,7 @@ function Home() {
 
 	return (
 		<div>
-			<AnadirProducto setProductos={setProductos} />
+			<BarraAnadirProducto setProductos={setProductos} />
 			<TablaProducto productos={productos} setProductos={setProductos} />
 		</div>
 	);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Api from "../api/Api";
 
-function AnadirProducto({ setProductos }) {
+function BarraAnadirProducto({ setProductos }) {
 	const [name, setName] = useState("");
 	const [cantidad, setCantidad] = useState("");
 	const [precio, setPrecio] = useState("");
@@ -10,8 +10,8 @@ function AnadirProducto({ setProductos }) {
 		e.preventDefault();
 		const producto = {
 			name: name,
-			price: parseFloat(precio) || 0,
-			stock_quantity: parseInt(cantidad) || 0,
+			price: parseFloat(precio || "0"),
+			stock_quantity: parseInt(cantidad || "0"),
 		};
 		await Api.addProducto(producto);
 		setName("");
@@ -62,4 +62,4 @@ function AnadirProducto({ setProductos }) {
 	);
 }
 
-export default AnadirProducto;
+export default BarraAnadirProducto;

@@ -19,8 +19,8 @@ function Login({
 						onSubmit={async (e) => {
 							e.preventDefault();
 							const fd = new FormData(e.currentTarget);
-							const email = String(fd.get("email") ?? "");
-							const password = String(fd.get("contrasena") ?? "");
+							const email = fd.get("email");
+							const password = fd.get("contrasena");
 
 							// Obtengo la Api y si no se consigue muestra una alerta
 							const token = await Api.getToken(email, password);

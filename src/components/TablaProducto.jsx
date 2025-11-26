@@ -1,5 +1,6 @@
 //import { JSX } from "react";
 import { useEffect, useState } from "react";
+import ModalEditarProducto from "./ModalEditarProducto";
 import Api from "../api/Api";
 
 function TablaProducto({ productos, setProductos }) {
@@ -30,13 +31,27 @@ function TablaProducto({ productos, setProductos }) {
 				<td>{producto.price}$</td>
 				<td className={stockColor}>{producto.stock_quantity}</td>
 				<td>
-					<button className="btn btn-warning mr-1">Editar</button>
+					<button
+						className="btn btn-warning mr-1"
+						onClick={() =>
+							document
+								.querySelector(`dialog[idproducto="${producto.id}"]`)
+								.showModal()
+						}
+					>
+						Editar
+					</button>
 					<button
 						className="btn btn-error"
 						onClick={() => handleDelete(producto.id)}
 					>
 						Eliminar
 					</button>
+					<ModalEditarProducto
+						idproducto={producto.id}
+						producto={producto}
+						setProductos={setProductos}
+					/>
 				</td>
 			</tr>
 		);
