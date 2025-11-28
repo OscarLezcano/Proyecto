@@ -9,6 +9,8 @@ A small front-end web application to manage CRUD operations for professor Raul N
 
 -   **Authentication:** secure, persistent login with JWT.
 -   **CRUD operations for Products:** create, read, update and delete products from the graphical interface.
+-   **Add and delete customers:** admins are able to create and delete users.
+-   **Sales view:** table for visualizing all sales information.
 
 ## 💻 Tech Stack
 
