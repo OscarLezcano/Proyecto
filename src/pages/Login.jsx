@@ -1,6 +1,6 @@
 import Api from "../api/Api";
 import useMiniERP from "../hooks/useMiniERP";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Login({
@@ -26,7 +26,13 @@ function Login({
 		navigate('/home'); // Redirigir si fue exitoso
 
 	};
-	if (loading) {
+	let token = localStorage.getItem("token")
+	if (token) {
+		return(
+			<Navigate to="/home" replace/>
+		)
+	}
+	else if (loading) {
 		return (
 			<div className="flex justify-center items-center min-h-screen ">
 				<span className="loading loading-spinner loading-xl"></span></div>)
