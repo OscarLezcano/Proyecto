@@ -1,16 +1,18 @@
 //import { JSX } from "react";
 import { useEffect, useState } from "react";
 import ModalEditarProducto from "./ModalEditarProducto";
-import Api from "../api/Api";
+import useMiniERP from "../hooks/useMiniERP";
 
 function TablaProducto({ productos, setProductos }) {
+	const { deleteProducto, loading, error, getProductos } = useMiniERP();
+	const [isDelete, setIsDelete] = useState(false)
+
+	useEffect(() => {
+		getProductos().then((p) => setProductos(p ?? []));
+	}, [isDelete])
+
 	const handleDelete = async (id) => {
-		const isDelete = await Api.deleteProducto(id);
-		if (isDelete) {
-			Api.getProductos().then((p) => setProductos(p ?? []));
-		} else {
-			alert("No se pudo eliminar el producto.");
-		}
+		setIsDelete(await deleteProducto(id));
 	};
 
 	const rows = [];
@@ -58,6 +60,15 @@ function TablaProducto({ productos, setProductos }) {
 	}
 	return (
 		<div className="ml-15 mr-15 mt-10">
+			{error && (
+				<div className="toast toast-top toast-end z-50">
+					<div role="alert" className="alert alert-error">
+						<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Error al borrar el producto</span>
+					</div>				</div>
+			)}
 			<table className="table">
 				<thead>
 					<tr>

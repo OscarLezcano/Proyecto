@@ -6,7 +6,7 @@ const useMiniERP = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const isUserLogged = () => {
-        
+
     }
     // keep it DRY ;)
     const getAuthHeaders = () => ({

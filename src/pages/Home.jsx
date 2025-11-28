@@ -2,12 +2,13 @@ import TablaProducto from "../components/TablaProducto";
 import BarraAnadirProducto from "../components/BarraAnadirProducto";
 import Api from "../api/Api";
 import { useState, useEffect } from "react";
+import useMiniERP from "../hooks/useMiniERP";
 
 function Home() {
 	const [productos, setProductos] = useState([]);
-
+	const { getProductos } = useMiniERP();
 	useEffect(() => {
-		Api.getProductos().then((p) => setProductos(p ?? []));
+		getProductos().then((p) => setProductos(p ?? []));
 	}, []);
 
 	return (
