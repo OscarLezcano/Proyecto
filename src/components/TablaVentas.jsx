@@ -10,8 +10,8 @@ function TablaVentas({ ventas, setVentas }) {
             	<tr key={venta.id}>
 				<td>{venta.customer.name}</td>
 				<td>{venta.order_date}</td>
-				<td>{venta.order_number}$</td>
-				<td>{venta.subtotal}</td>
+				<td>{venta.order_number}</td>
+				<td>{venta.subtotal}$</td>
 			</tr>
         )
     }
