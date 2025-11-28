@@ -4,8 +4,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import MainLayout from "./components/MainLayout";
 function App() {
-
-
 	return (
 		<>
 			<Routes>

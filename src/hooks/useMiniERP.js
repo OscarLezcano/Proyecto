@@ -5,6 +5,9 @@ const BASE_URL = "https://minierp.rbnetto.dev";
 const useMiniERP = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const isUserLogged = () => {
+        
+    }
     // keep it DRY ;)
     const getAuthHeaders = () => ({
         "Content-Type": "application/json",
@@ -32,9 +35,9 @@ const useMiniERP = () => {
                 return data.access_token;
             }
         } catch (error) {
-            setError(err.message);
+            setError(error.message);
             console.error("Login error:", error);
-            throw err;
+            throw error;
         } finally {
             setLoading(false)
         }
@@ -56,7 +59,7 @@ const useMiniERP = () => {
             if (!response.ok) throw new Error("Error al obtener productos");
 
             const data = await response.json();
-            return data.results; 
+            return data.results;
         } catch (err) {
             setError(err.message);
             console.error("getProductos error:", err);
