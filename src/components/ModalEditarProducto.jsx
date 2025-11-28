@@ -1,10 +1,11 @@
 import { useState } from "react";
-import Api from "../api/Api";
+import useMiniERP from "../hooks/useMiniERP";
 
 function ModalEditarProducto({ idproducto, producto, setProductos }) {
 	const [name, setName] = useState("");
 	const [cantidad, setCantidad] = useState("");
 	const [precio, setPrecio] = useState("");
+	const { editProducto, getProductos, loading, error } = useMiniERP()
 	return (
 		<dialog idproducto={idproducto} id="my_modal_3" className="modal">
 			<div className="modal-box">
@@ -23,8 +24,8 @@ function ModalEditarProducto({ idproducto, producto, setProductos }) {
 							stock_quantity: parseInt(fd.get("cantidad") || "0"),
 							price: parseFloat(fd.get("precio") || "0"),
 						};
-						await Api.editProducto(idproducto, NEWproducto);
-						Api.getProductos().then((p) => setProductos(p ?? []));
+						await editProducto(idproducto, NEWproducto);
+						getProductos().then((p) => setProductos(p ?? []));
 						form.reset();
 						document
 							.querySelector(`dialog[idproducto="${idproducto}"]`)
