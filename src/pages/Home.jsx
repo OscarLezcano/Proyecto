@@ -1,6 +1,5 @@
 import TablaProducto from "../components/TablaProducto";
 import BarraAnadirProducto from "../components/BarraAnadirProducto";
-import Api from "../api/Api";
 import { useState, useEffect } from "react";
 import useMiniERP from "../hooks/useMiniERP";
 

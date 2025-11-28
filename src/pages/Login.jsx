@@ -1,4 +1,3 @@
-import Api from "../api/Api";
 import useMiniERP from "../hooks/useMiniERP";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -55,9 +54,7 @@ function Login({ email = "admin@minierp.com", contrasena = "test123456" }) {
 			)}
 			<div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
 				<div className="card-body">
-					<h1 className="text-2xl sm:text-3xl font-extrabold text-center">
-						LOGIN
-					</h1>
+					<h1 className="text-2xl sm:text-3xl font-extrabold text-center">LOGIN</h1>
 					<form onSubmit={handleSubmit}>
 						<div>
 							<label className="label" htmlFor="email">
