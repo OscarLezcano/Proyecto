@@ -5,13 +5,11 @@ const BASE_URL = "https://minierp.rbnetto.dev";
 const useMiniERP = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const isUserLogged = () => {
-
-    }
+    const isUserLogged = () => {};
     // keep it DRY ;)
     const getAuthHeaders = () => ({
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token") || ''}`,
+        Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
     });
     // ╭────────────────────────────────────────────────────────╮
     // │                         Login                          │
@@ -26,7 +24,6 @@ const useMiniERP = () => {
             });
             const data = await response.json();
 
-
             if (!response.ok) throw new Error(data.detail || "Error en login");
 
             // Guardamos el token
@@ -39,7 +36,7 @@ const useMiniERP = () => {
             console.error("Login error:", error);
             throw error;
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }, []);
 
@@ -154,6 +151,120 @@ const useMiniERP = () => {
         }
     }, []);
 
+    // ==========================================================
+    //                    ORDENES DE VENTA
+    // ==========================================================
+
+    const getVentas = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${BASE_URL}/api/sales/orders/`, {
+                method: "GET",
+                headers: getAuthHeaders(),
+            });
+
+            if (!response.ok) throw new Error("Error al obtener órdenes de venta");
+            const data = await response.json();
+            return data.results;
+        } catch (err) {
+            setError(err.message);
+            console.error("getVentas error:", err);
+            return [];
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    const addVenta = useCallback(async (venta) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${BASE_URL}/api/sales/orders/`, {
+                method: "POST",
+                headers: getAuthHeaders(),
+                body: JSON.stringify(venta),
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(JSON.stringify(data));
+            return data;
+        } catch (err) {
+            setError(err.message);
+            console.error("addVenta error:", err);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    // ==========================================================
+    //                    cLIENTES
+    // ==========================================================
+
+    const getClientes = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${BASE_URL}/api/sales/customers/`, {
+                method: "GET",
+                headers: getAuthHeaders(),
+            });
+
+            if (!response.ok) throw new Error("Error al obtener clientes");
+            const data = await response.json();
+            return data.results;
+        } catch (err) {
+            setError(err.message);
+            console.error("getClientes error:", err);
+            return [];
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    const addCliente = useCallback(async (cliente) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${BASE_URL}/api/sales/customers/`, {
+                method: "POST",
+                headers: getAuthHeaders(),
+                body: JSON.stringify(cliente),
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(JSON.stringify(data));
+            return data;
+        } catch (err) {
+            setError(err.message);
+            console.error("addCliente error:", err);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    const deleteCliente = useCallback(async (id_cliente) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${BASE_URL}/api/sales/customers/${id_cliente}/`, {
+                method: "DELETE",
+                headers: getAuthHeaders(),
+            });
+
+            if (!response.ok) throw new Error("Error al eliminar cliente");
+            return true;
+        } catch (err) {
+            setError(err.message);
+            console.error("deleteCliente error:", err);
+            return false;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
     return {
         loading,
         error,
@@ -163,8 +274,12 @@ const useMiniERP = () => {
         editProducto,
         deleteProducto,
         getProductoById,
+        getVentas,
+        addVenta,
+        getClientes,
+        addCliente,
+        deleteCliente,
     };
+};
 
-}
-
-export default useMiniERP
+export default useMiniERP;
