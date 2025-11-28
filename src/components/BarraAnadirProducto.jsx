@@ -1,10 +1,11 @@
 import { useState } from "react";
-import Api from "../api/Api";
+import useMiniERP from "../hooks/useMiniERP";
 
 function BarraAnadirProducto({ setProductos }) {
 	const [name, setName] = useState("");
 	const [cantidad, setCantidad] = useState("");
 	const [precio, setPrecio] = useState("");
+	const { addProducto, getProductos } = useMiniERP()
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -13,11 +14,11 @@ function BarraAnadirProducto({ setProductos }) {
 			price: parseFloat(precio || "0"),
 			stock_quantity: parseInt(cantidad || "0"),
 		};
-		await Api.addProducto(producto);
+		await addProducto(producto);
 		setName("");
 		setCantidad("");
 		setPrecio("");
-		await Api.getProductos().then((p) => setProductos(p ?? []));
+		await getProductos().then((p) => setProductos(p ?? []));
 	};
 
 	return (
