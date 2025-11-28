@@ -5,7 +5,7 @@ function ModalEditarProducto({ idproducto, producto, setProductos }) {
 	const [name, setName] = useState("");
 	const [cantidad, setCantidad] = useState("");
 	const [precio, setPrecio] = useState("");
-	const { editProducto, getProductos, loading, error } = useMiniERP()
+	const { editProducto, getProductos, loading, error } = useMiniERP();
 	return (
 		<dialog idproducto={idproducto} id="my_modal_3" className="modal">
 			<div className="modal-box">

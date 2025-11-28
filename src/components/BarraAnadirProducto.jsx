@@ -5,7 +5,7 @@ function BarraAnadirProducto({ setProductos }) {
 	const [name, setName] = useState("");
 	const [cantidad, setCantidad] = useState("");
 	const [precio, setPrecio] = useState("");
-	const { addProducto, getProductos } = useMiniERP()
+	const { addProducto, getProductos } = useMiniERP();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
