@@ -1,11 +1,18 @@
 import Api from "../api/Api";
+import useMiniERP from "../hooks/useMiniERP";
+import { useNavigate } from "react-router-dom";
 
 function Login({
 	email = "admin@minierp.com",
 	contrasena = "test123456",
-	onLogin,
+
 }) {
 	// Inicializo los valores del localStorage
+	const { login, loading, error } = useMiniERP
+	if (loading) {
+		return (
+			<span className="loading loading-spinner loading-xl"></span>)
+	}
 	localStorage.setItem("token", "");
 	localStorage.setItem("isLogged", "false");
 	return (
